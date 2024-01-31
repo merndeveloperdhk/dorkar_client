@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import SingleElement from "./SingleElement";
+import useHook from "../../hook/useHook";
 
 const Elements = () => {
+    const{user} = useHook();
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/addPost')
+        fetch(`http://localhost:5000/addPost?email=${user.email}`)
         .then(res => res.json())
         .then(data => setServices(data))
-    },[])
+    },[user.email])
     return (
         <div>
-            <h1>service length : {services.length}</h1>
+            <h1>service length by email : {user.email? services.length : "No matched email"}</h1>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
                 {
                     services.map(service => <SingleElement

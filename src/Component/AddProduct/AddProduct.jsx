@@ -53,7 +53,7 @@ const AddProduct = () => {
       if(data.insertedId > 0){
         alert('add successfully done')
       }
-    }) */
+    }) 
   /*   axios.post('http://localhost:5000/addProducts',postProducts)
     .then(res => {
       console.log(res.data);
@@ -209,8 +209,8 @@ const AddProduct = () => {
           </fieldset>
           <input
             type="submit"
-            value="Add Post"
-            className="btn btn-primary w-min mx-auto"
+            value="Post your Product"
+            className="btn bg-sky-500 w-min mx-auto"
           />
         </form>
       </section>

@@ -8,9 +8,15 @@ import RelatedProduct from "../RelatedProduct/RelatedProduct";
 import MoreItems from "./MoreItems";
 import ShareProducts from "./ShareProducts";
 import ReviewTabs from "./ReviewTabs";
+import { Link, useLoaderData } from "react-router-dom";
+import { useState } from "react";
 
 
 const ProductDetails = () => {
+  const[showEmail, setShowEmail] = useState(false)
+  const product = useLoaderData();
+  console.log(product);
+  const {category, division, email, name, title,price, picture} = product;
 
 
   return (
@@ -27,8 +33,8 @@ const ProductDetails = () => {
           voluptates. Est vitae minus repudiandae reiciendis minima fugit, optio
           hic nostrum ea, itaque totam unde!
         </h1>
-        <ProductImg></ProductImg>
-        <RightProduct></RightProduct>
+        <ProductImg product={product}></ProductImg>
+        <RightProduct product={product}></RightProduct>
       </div>
       {/* Right side */}
       <div className="md:w-3/4  ">
@@ -36,17 +42,17 @@ const ProductDetails = () => {
           <div className="w-full md:w-1/2 overflow-hidden">
           
             <img
-                className="min-h-fit overflow-hidden "
-                src ="https://i.ibb.co/HzVXtyn/AKA8518.jpg"
+                className="md:h-96 mx-auto md:w-full overflow-hidden object-cover "
+                src ={picture}
                 alt=""
               /> 
             
             {/* Sub image */}
-            <div className="mt-2 flex flex-col md:flex-row gap-1 overflow-hidden ">
-           <img src="https://i.ibb.co/HzVXtyn/AKA8518.jpg" alt="" className="w-[25%]"/>
-           <img src="https://i.ibb.co/HzVXtyn/AKA8518.jpg" alt="" className="w-[25%]"/>
-           <img src="https://i.ibb.co/HzVXtyn/AKA8518.jpg" alt="" className="w-[25%]"/>
-           <img src="https://i.ibb.co/HzVXtyn/AKA8518.jpg" alt="" className="w-[25%]"/>
+            <div className="mt-2 flex  gap-1 overflow-hidden h-20 object-cover ">
+           <img src={picture} alt="" className="w-[25%] object-cover"/>
+           <img src={picture} alt="" className="w-[25%] object-cover"/>
+           <img src={picture} alt="" className="w-[25%] object-cover"/>
+           <img src={picture} alt="" className="w-[25%] object-cover"/>
            
            
             </div>
@@ -55,7 +61,12 @@ const ProductDetails = () => {
           <div className=" w-full md:w-1/2 px-2">
           
             <div className="space-y-1">
-              <h1 className="text-2xl font-semibold">Product Name : </h1>
+              <h1 className="text-2xl font-semibold">Product Name :{title} </h1>
+              <div className="flex gap-2">
+              <h1 className="text-md font-semibold">Seller : {name} </h1>
+              <h1 className="text-md font-semibold"><Link onClick={() => setShowEmail(!showEmail)}>
+                {showEmail ? <><span>{email}</span>  </>: <button className="px-2 bg-slate-400 text-white rounded">Click to Show Email</button>}</Link> </h1>
+              </div>
              
               <div className="flex gap-3">
                 <h1>Star mark</h1>
@@ -63,10 +74,12 @@ const ProductDetails = () => {
               </div>
               <div>
                 <div className="flex items-center gap-1 ">
-                <h1 className="font-semibold">ManuFacturer: </h1><span className="font-bold ">manufacturer</span>
+                <h1 className="font-semibold">ManuFacturer: <span className="font-bold ">manufacturer</span></h1>
                 </div>
+                <h1 className="font-semibold">Division: <span className="font-bold ">{division}</span></h1>
+                <h1 className="font-semibold">Category: <span className="font-bold ">{category}</span></h1>
                 <h1 className="my-1">Made of Country: <span className="font-bold">made_country</span></h1>
-                <h1>Price: <span className="text-xl text-orange-500 font-bold">$price</span></h1>
+                <h1>Price: <span className="text-xl text-orange-500 font-bold">${price}</span></h1>
                 
               </div>
               <div>Description: <br/>
@@ -138,12 +151,12 @@ const ProductDetails = () => {
               <MoreItems></MoreItems>
             </div>
             {/* Review tabs */}
-            <ReviewTabs></ReviewTabs>
+            <ReviewTabs product={product}></ReviewTabs>
         {/* Related Products */}
         <div className="md:mt-4 bg-slate-200 p-2">
           <h1 className="text-2xl font-bold md:mb-6">Related Products</h1>
           <div>
-            <RelatedProduct></RelatedProduct>
+            <RelatedProduct product={product}></RelatedProduct>
           </div>
         </div>
       </div>

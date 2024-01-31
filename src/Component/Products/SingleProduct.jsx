@@ -4,44 +4,43 @@ import PropTypes from 'prop-types';
 
 
 const SingleProduct = ({product}) => {
-    const {category, division, email, name, title,price, picture} = product;
+    const {category, division, email, name, title,price, picture, _id} = product;
     return (
         <div>
             <div className=" bg-white border p-2  relative border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
+        <Link to={`/details/${_id}`}>
           <img
             className="rounded-t-lg md:h-48 md:w-48 w-full mx-auto object-fit"
             src={picture}
             alt={title}
           />
-        </a>
+        </Link>
         <div className="p-2 text-center">
-          <a href="#">
+        <Link to={`/details/${_id}`}>
             <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
               {title}
             </h5>
-          </a>
-          <a href="#">
+            </Link>
+         
             <h5 className="mb-2 text-md font-bold tracking-tight text-green-700 dark:text-white">
               {name}
             </h5>
-          </a>
-          <a href="#">
+         
+         
             <h5 className="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white">
               {email}
             </h5>
-          </a>
+       
           <div className="flex justify-between">
-          <a href="#">
+          
             <h5 className="mb-2 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
               Cat: {category}
             </h5>
-          </a>
-          <a href="#">
+         
             <h5 className="mb-2 text-base font-semibold tracking-tight text-gray-900 dark:text-white">
               {division}
             </h5>
-          </a>
+         
           </div>
           <div>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -54,7 +53,7 @@ const SingleProduct = ({product}) => {
           </p>
           </div>
           <Link
-            to='/details'
+            to={`/details/${_id}`}
             className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >
             Read more
@@ -67,9 +66,9 @@ const SingleProduct = ({product}) => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
+                /* stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
+                stroke-width="2" */
                 d="M1 5h12m0 0L9 1m4 4L9 9"
               />
             </svg>

@@ -10,7 +10,7 @@ const NavMenu = () => {
      <li><Link to='/'>Home</Link></li>
         <li>
           <a>Shop</a>
-          <ul className="p-2">
+          <ul className="p-2 z-10">
             <li><a>Electronics</a></li>
             <li><a>Computer</a></li>
           </ul>
@@ -40,7 +40,7 @@ const NavMenu = () => {
       <li>
         <details>
           <summary>Shop</summary>
-          <ul className="p-2">
+          <ul className="p-2 z-10">
             <li><a>Electronics</a></li>
             <li><a>Computer</a></li>
           </ul>

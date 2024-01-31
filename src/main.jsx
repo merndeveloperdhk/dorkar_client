@@ -40,8 +40,9 @@ const router = createBrowserRouter([
         element:<LogIn></LogIn>
       },
       {
-        path:'/details',
-        element:<ProductDetails></ProductDetails>
+        path:'/details/:id',
+        element:<ProductDetails></ProductDetails>,
+        loader:({params}) => fetch(`http://localhost:5000/addPost/${params.id}`)
       },
       {
         path:'/postAdd',

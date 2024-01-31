@@ -1,9 +1,9 @@
-const RightProduct = () => {
+const RightProduct = ({product}) => {
   return (
     <div>
       <div className="card  bg-base-100 image-full mb-2">
         <figure>
-          <img src="https://i.ibb.co/M2QsW6g/blog-3.jpg" alt="Shoes" />
+          <img src={product.picture} alt="Shoes" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">Shoes!</h2>

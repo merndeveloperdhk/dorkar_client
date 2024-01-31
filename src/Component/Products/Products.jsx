@@ -11,10 +11,9 @@ const Products = () => {
   },[])
   return (
    <div>
-      <h1>Total Products: {products.length}</h1>
      <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
           {
-            products.slice(0,10).map(product => <SingleProduct
+            products.map(product => <SingleProduct
             key={product._id}
             product={product}
             ></SingleProduct>)

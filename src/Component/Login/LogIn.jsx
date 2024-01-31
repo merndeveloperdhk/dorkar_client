@@ -3,10 +3,30 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import useHook from '../../hook/useHook';
+import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form';
 
-const LogIn = () => {
-    
+const LogIn = (data) => {
+    const{passwordLogin} = useHook();
 
+    const {
+      register,
+      handleSubmit
+    } = useForm();
+
+    const onSubmit = (data) => {
+      passwordLogin(data.email, data.password)
+      .then(result => {
+        console.log(result.user);
+        toast.success("Login Successfully done")
+      })
+      .catch(error => {
+        toast.error(error.message);
+        console.log(error.message);
+      })
+
+    }
     
   return (
     <div>
@@ -28,7 +48,7 @@ const LogIn = () => {
            </div>
           </div>
           <div className="card flex-shrink-0 w-full  shadow-2xl bg-base-100 md:w-1/2">
-            <form  className="card-body">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <h1 className='text-2xl font-bold text-center'>Login</h1>
               <div className="form-control">
                 <label className="label">
@@ -38,6 +58,7 @@ const LogIn = () => {
                   type="email"
                   name="email"
                   placeholder="email"
+                  {...register("email")}
                   className="input input-bordered"
                   required
                 />
@@ -50,6 +71,7 @@ const LogIn = () => {
                   type="password"
                   name="password"
                   placeholder="password"
+                  {...register("password")}
                   className="input input-bordered"
                   required
                 />
@@ -59,7 +81,7 @@ const LogIn = () => {
                   </a>
                 </label>
               </div>
-              <div className="form-control">
+           {/*    <div className="form-control">
                 <label className="label">
                
                 </label>
@@ -69,10 +91,10 @@ const LogIn = () => {
                   name="captcha"
                   placeholder="Type Captcha"
                   className="input input-bordered"
-                  required
+                 
                 />
-               {/* <button onClick={validate} className='btn btn-outline btn-xm mt-2'>Validate</button> */}
-              </div>
+              
+              </div> */}
               <div className="form-control mt-4">
                 <input   className="btn bg-sky-400" type="submit" value="Login" />
               </div>
