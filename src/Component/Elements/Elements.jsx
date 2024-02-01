@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import SingleElement from "./SingleElement";
 import useHook from "../../hook/useHook";
+import axios from "axios";
 
 const Elements = () => {
     const{user} = useHook();
     const [services, setServices] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/addPost?email=${user.email}`)
+        /* fetch(`http://localhost:5000/addPost?email=${user.email}`)
         .then(res => res.json())
-        .then(data => setServices(data))
+        .then(data => setServices(data)) */
+        axios.get(`http://localhost:5000/addPost?email=${user.email}`)
+        .then(res => {
+            setServices(res.data)
+        })
     },[user.email])
     return (
         <div>

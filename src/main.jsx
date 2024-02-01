@@ -16,6 +16,8 @@ import AddProduct from "./Component/AddProduct/AddProduct";
 import Elements from "./Component/Elements/Elements";
 import SingleElement from "./Component/Elements/SingleElement";
 import AuthProvider from "./Provider/AuthProvider";
+import PrivateRoute from "./Component/PrivateRoute/PrivateRoute";
+import PaginationButton from "./Component/Pagination/PaginationButton";
 
 const router = createBrowserRouter([
   {
@@ -50,11 +52,16 @@ const router = createBrowserRouter([
       },
       {
         path:'/elements',
-        element:<Elements></Elements>
+        element:<PrivateRoute><Elements></Elements></PrivateRoute>
       },
       {
         path:'/singleElement',
         element:<SingleElement></SingleElement>
+      },
+      {
+        path:'/pagination',
+        element:<PaginationButton></PaginationButton>,
+        loader: ()=> fetch('http://localhost:5000/productsCount')
       }
     ]
   },

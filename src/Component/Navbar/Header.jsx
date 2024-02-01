@@ -1,21 +1,23 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
 import useHook from "../../hook/useHook";
 import toast from "react-hot-toast";
 
 const Header = () => {
   const { user, logOut } = useHook();
+  const navigate = useNavigate();
   const handleLogOut = () => {
     logOut().then(() => {
       console.log("logOut successfully done");
       toast.success("logout success");
+      navigate(location?.state ? location?.state : '/')
     });
   };
   console.log(user);
   return (
     <div className="flex flex-col md:flex-row md:justify-between bg-slate-100 p-2 ">
       <div>
-        <h1>Welcome <span className="text-green-600 font-semibold">{user? user.displayName || user.email: "Guest"}</span></h1>
+        <h1>Welcome <span className="text-green-600 font-semibold">{user? user.displayName: "Guest"}</span></h1>
       </div>
       {/* Right menu */}
       <div className="flex flex-col md:flex-row gap-1 md:gap-2">

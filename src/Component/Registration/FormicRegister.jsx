@@ -5,9 +5,13 @@ import BreadCums from "../BreadCums/BreadCums";
 import { Helmet } from "react-helmet-async";
 import useHook from "../../hook/useHook";
 import toast from "react-hot-toast";
+import {  updateProfile } from "firebase/auth";
+import { useState } from "react";
 
 const FormicRegister = () => {
- const{createUser} = useHook()
+ const{createUser} = useHook();
+ const[photoUrl, setPhotoUrl] = useState(' ');
+
 
   const {
     register,
@@ -21,7 +25,20 @@ const FormicRegister = () => {
     createUser(data.email, data.password)
     .then(result => {
       console.log(result.user);
-      toast.success("Account create successfully done")
+      toast.success("Account create successfully done");
+      // update profile
+      updateProfile(result.user, {
+        displayName:data.name,
+        photoURL:"https://i.ibb.co/JH2Tcrn/member4.png"
+        
+      })
+      .then(() => {
+        console.log("Profile updated");
+        setPhotoUrl(data.photo)
+      })
+      .catch(error => {
+        console.log(error.message);
+      })
     })
     .catch(error => {
       console.log(error.message);
@@ -35,7 +52,7 @@ const FormicRegister = () => {
       <Helmet><title>SignUp | future classified site</title></Helmet>
       <BreadCums></BreadCums>
       <section className="bg-gray-50 dark:bg-gray-900">
-        <div className="flex flex-col md:flex-row items-center justify-center md:px-6 px-2 py-8 mx-auto  lg:py-0">
+        <div className="flex flex-col md:flex-row items-center justify-center md:px-4 px-2 py-8 mx-auto  lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:my-4 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 ">
             <div className="p-1 space-y-4 md:space-y-4 sm:p-8 ">
               <h1 className="text-xl font-bold leading-tight text-center tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -225,7 +242,7 @@ const FormicRegister = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full  bg-green-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  className="w-full  bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   Create an account
                 </button>
@@ -234,6 +251,7 @@ const FormicRegister = () => {
             </div>
           </div>
           <div className="mt-4 md:mt-0">
+            
                 {/* Social Login */}
               <SocialLogin></SocialLogin>
               

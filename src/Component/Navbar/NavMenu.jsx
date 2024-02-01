@@ -3,9 +3,11 @@ import { RiShoppingBagLine } from "react-icons/ri";
 import { FaCodeCompare } from "react-icons/fa6";
 import { BsTelephone } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import useHook from "../../hook/useHook";
 
 
 const NavMenu = () => {
+  const{user} = useHook();
     const menuItem = <>
      <li><Link to='/'>Home</Link></li>
         <li>
@@ -18,7 +20,7 @@ const NavMenu = () => {
         <li><a>Vendor</a></li>
         <li><a>Blog</a></li>
         <li><a>Pages</a></li>
-        <li><Link to="/elements">Elements</Link></li>
+        <li>{user ? <Link to="/elements">Elements</Link>: ''}</li>
     </>
     return (
         <div>
@@ -49,7 +51,7 @@ const NavMenu = () => {
       <li><a>Vendor</a></li>
       <li><a>Blog</a></li>
       <li><a>Pages</a></li>
-      <li><Link to="/elements">Elements</Link></li>
+      <li>{user ? <Link to="/elements">Elements</Link>: ''}</li>
     </ul>
   </div>
   {/* Right menu  icon */}

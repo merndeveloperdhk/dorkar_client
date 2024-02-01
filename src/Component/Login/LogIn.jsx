@@ -1,14 +1,17 @@
 
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import useHook from '../../hook/useHook';
 import toast from 'react-hot-toast';
 import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import BreadCums from '../BreadCums/BreadCums';
 
-const LogIn = (data) => {
+const LogIn = () => {
     const{passwordLogin} = useHook();
+    const navigate = useNavigate();
 
     const {
       register,
@@ -18,8 +21,22 @@ const LogIn = (data) => {
     const onSubmit = (data) => {
       passwordLogin(data.email, data.password)
       .then(result => {
-        console.log(result.user);
+        const email = data.email;
+        const loggedUser = result.user
         toast.success("Login Successfully done")
+        console.log(loggedUser);
+        const user = {email}
+        
+        // Get access token
+        axios.post('http://localhost:5000/jwt', user, {withCredentials: true})
+        .then(res => {
+          console.log(res.data);
+          if(res.data.success){
+              navigate(location?.state ? location?.state : '/login')
+              navigate('/')
+          }
+        })
+
       })
       .catch(error => {
         toast.error(error.message);
@@ -29,12 +46,13 @@ const LogIn = (data) => {
     }
     
   return (
-    <div>
+    <div className='mt-2'>
         <Helmet>
             <title>Misams Kitchen | Login</title>
         </Helmet>
-      <div className="hero min-h-screen bg-base-100 ">
-        <div className="hero-content flex-col lg:flex-row-reverse mt-4 w-full md:w-2/3">
+        <BreadCums></BreadCums>
+      <div className="hero  bg-base-100 ">
+        <div className="hero-content flex-col lg:flex-row-reverse mt-2 w-full md:w-2/3">
           <div className="text-center lg:text-left md:w-1/2 w-full">
             {/* <h1 className="text-5xl font-bold text-center">Login now!</h1>
             <p className="py-6 text-center">
@@ -96,13 +114,14 @@ const LogIn = (data) => {
               
               </div> */}
               <div className="form-control mt-4">
-                <input   className="btn bg-sky-400" type="submit" value="Login" />
+                <input   className="btn bg-sky-400 hover:bg-sky-600" type="submit" value="Login" />
               </div>
             </form>
           {/*  <div>
            <SocialLogin></SocialLogin>
             <p className='mt-2 px-8 mb-4 text-center'><small>New here? <Link className='text-orange-500' to='/register'>Create an account</Link></small></p>
            </div> */}
+           
           </div>
         </div>
       </div>

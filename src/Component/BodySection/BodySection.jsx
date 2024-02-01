@@ -5,8 +5,7 @@ import Sort from "../Caterory/Sort";
 import Color from "../Color/Color";
 import FilterSection from "../FilterSection/FilterSection";
 import Location from "../Location/Location";
-import Pagination from "../Pagination/Pagination";
-import Products from "../Products/Products";
+import PaginationButton from "../Pagination/PaginationButton";
 import Size from "../Size/Size";
 import Technology from "../Technology/Technology";
 
@@ -26,8 +25,8 @@ const BodySection = () => {
         </div>
         <div className="col-span-9 space-y-4">
           <Sort></Sort>
-          <Products></Products>
-          <Pagination></Pagination> 
+          {/* <Products></Products> */}
+          <PaginationButton></PaginationButton>
           <div></div>
         </div>
       </div>

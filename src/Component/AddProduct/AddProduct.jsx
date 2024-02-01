@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import BreadCums from "../BreadCums/BreadCums";
 const image_hosting_key = import.meta.env.VITE_IMAGEHOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
@@ -61,7 +62,8 @@ const AddProduct = () => {
     }) */
 
   return (
-    <div className="  mx-auto max-w-7xl">
+    <div className="mt-2 mb-2  mx-auto max-w-7xl">
+      <BreadCums></BreadCums>
       <section className="p-6 dark:bg-gray-800 dark:text-gray-50 w-full mx-auto ">
         <div className="space-y-2 text-center ">
           <h1>Add Your Product</h1>
@@ -152,9 +154,9 @@ const AddProduct = () => {
                 />
               </div>
               <div className="col-span-full sm:col-span-3">
-                 <label htmlFor="category" className="text-sm mr-2">
+                 {/* <label htmlFor="category" className="text-sm mr-2">
                     Category
-                  </label>
+                  </label> */}
                   <select className="select w-full max-w-xs " value="value" name="category"  {...register("category")}>
                     {/*  {
                     categories?.map(cat =><option 

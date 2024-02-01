@@ -108,12 +108,12 @@ const ProductDetails = () => {
                   <button>+</button>
                 </div>
               </div>
-              <button type="button" className="flex gap-1 items-center btn bg-orange-500 text-white">
+              <button type="button" className="flex gap-1 items-center btn bg-orange-500 hover:bg-orange-600 text-white">
                 <MdOutlineShoppingCartCheckout />
                 <p>Add to Cart</p>
               </button>
               {/* Buy now button */}
-              <button className="btn bg-teal-800 text-white">Buy Now</button>
+              <button className="btn bg-teal-700 hover:bg-teal-800 text-white">Buy Now</button>
             </div>
             {/* whish list and compare */}
             <div className="flex md:gap-6 md:mt-3 mb-1 md:text-lg font-semibold w-full">
